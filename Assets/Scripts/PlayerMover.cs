@@ -11,9 +11,9 @@ public class PlayerMover : MonoBehaviour
 
     private Rigidbody2D _playerRigidbody;
 
-    private void Start()
+    private void Awake()
     {
-        CheckComponents();
+        GetNeededComponents();
     }
 
     private void Update()
@@ -22,7 +22,7 @@ public class PlayerMover : MonoBehaviour
         ChangePositionY();
     }
 
-    private void CheckComponents()
+    private void GetNeededComponents()
     {
         _playerRigidbody = GetComponent<Rigidbody2D>();
         _userInput = GetComponent<UserInput>();

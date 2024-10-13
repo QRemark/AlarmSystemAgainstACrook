@@ -1,47 +1,26 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AlarmSoundMaker))]
 public class Alarm : MonoBehaviour
 {
-    [SerializeField] private AudioSource _sound;
     [SerializeField] private Collider2D _targetZone;
     [SerializeField] private Collider2D _player;
+    [SerializeField] private AlarmSoundMaker _alarmSoundMaker;
 
-    private float _maxVolume = 1.0f;
-    private float _changeVolumeSpeed = 0.1f;
-    private float _targetVolume = 0f;
-
-    private bool _isPlaying = false;
-
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        CheckZone();
-        ChangeVolume();
-    }
-
-    private void CheckZone()
-    {
-        if (_targetZone.IsTouching(_player))
+        if (collision == _player)
         {
-            if (_isPlaying == false)
-            {
-                _sound.Play();
-                _isPlaying = true;
-            }
-
-            _targetVolume = _maxVolume;
-        }
-        else
-        {
-            _targetVolume = 0f;
-            _isPlaying = false;
+            _alarmSoundMaker.PlayMaxVolume();
         }
     }
 
-    private void ChangeVolume()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        _sound.volume = Mathf.MoveTowards(_sound.volume, _targetVolume,
-            _changeVolumeSpeed * Time.deltaTime);
+        if (collision == _player)
+        {
+            _alarmSoundMaker.MakeMinVolume();
+        }
     }
 }
