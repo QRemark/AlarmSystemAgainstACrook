@@ -11,16 +11,12 @@ public class Alarm : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision == _player)
-        {
             _alarmSoundMaker.PlayMaxVolume();
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision == _player)
-        {
             _alarmSoundMaker.MakeMinVolume();
-        }
     }
 }

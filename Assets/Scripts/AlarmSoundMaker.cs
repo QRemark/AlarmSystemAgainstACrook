@@ -19,7 +19,8 @@ public class AlarmSoundMaker : MonoBehaviour
         ChangeVolume();
     }
 
-    public void MakeMinVolume() => _targetVolume = 0f;
+    public void MakeMinVolume() => 
+        _targetVolume = 0f;
 
     public void PlayMaxVolume()
     {
